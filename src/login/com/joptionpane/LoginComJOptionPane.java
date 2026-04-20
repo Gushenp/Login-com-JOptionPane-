@@ -21,7 +21,7 @@ public class LoginComJOptionPane {
             
             String login = JOptionPane.showInputDialog("Digite seu login");
             String senha = JOptionPane.showInputDialog("Digite sua senha");
-            if (!login.equals("admin") && !senha.equals("1313")){
+            if (!login.equals("admin") || !senha.equals("1313")){
                 mensagem = "Login ou senha inválidos! Tentar novmente?";
                 escolha = _verificar_escolha_usuario(mensagem);
             } 
