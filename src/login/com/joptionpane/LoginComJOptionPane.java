@@ -15,28 +15,33 @@ public class LoginComJOptionPane {
 
        String mensagem = "";
        int escolha = 0;
-       int tentativasMaximas = 0;
+       int tentativasMaximas = 3;
+       boolean usuarioBloqueado = false;
        
-       do {
-            
-            String login = JOptionPane.showInputDialog("Digite seu login");
-            String senha = JOptionPane.showInputDialog("Digite sua senha");
-            if (!login.equals("admin") || !senha.equals("1313")){
-                mensagem = "Login ou senha inválidos! Tentar novmente?";
-                escolha = _verificar_escolha_usuario(mensagem);
-            } 
-            
-            if (login.equals("admin") && senha.equals("1313")){
-                mensagem = "Login realizado! Bem vindo!";
-                escolha = 1;
-                _tela_de_aviso(mensagem);
-            }
-            
-            tentativasMaximas++;
-            if (tentativasMaximas > 3){
+       do {            
+
+            tentativasMaximas--;
+
+            if (tentativasMaximas < 0){
                 mensagem = "Tentativas Máximas! Tente mais tarte!";
                 _tela_de_aviso(mensagem);
+                usuarioBloqueado = true;
                 escolha = 1;
+            }
+            
+            if (usuarioBloqueado == false){
+                String login = JOptionPane.showInputDialog("Digite seu login");
+                String senha = JOptionPane.showInputDialog("Digite sua senha");
+                if (!login.equals("admin") || !senha.equals("1313")){
+                    mensagem = "Login ou senha inválidos! Tentar novmente?";
+                    escolha = _verificar_escolha_usuario(mensagem);
+                } 
+
+                if (login.equals("admin") && senha.equals("1313")){
+                    mensagem = "Login realizado! Bem vindo!";
+                    escolha = 1;
+                    _tela_de_aviso(mensagem);
+                }
             }
             
        } while(escolha == 0);
